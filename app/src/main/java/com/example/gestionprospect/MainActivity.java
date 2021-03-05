@@ -2,6 +2,7 @@ package com.example.gestionprospect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     public void connection(String login, String password){
         textViewLogin.setText(login);
         textViewMDP.setText(password);
+
+        Intent intent=new Intent(this, Accueil.class);
+        startActivity(intent);
+
     }
 
 
