@@ -22,13 +22,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Liens entre graphique/variable
         login = (TextView) findViewById(R.id.editTextLogin);
         password = (TextView) findViewById(R.id.editTextPassword);
         validate = (Button) findViewById(R.id.btn_Validate);
-
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
         textViewMDP = (TextView) findViewById(R.id.textViewMDP);
 
+        //Quand on click sur le bouton --> méthode connection
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
