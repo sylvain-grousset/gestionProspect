@@ -27,12 +27,12 @@ public class Nouveau extends AppCompatActivity {
         email = (TextView) findViewById(R.id.editTextEmail);
         notes = (TextView) findViewById(R.id.editTextNotes);
 
-        enregistrer.setOnClickListener(new View.OnClickListener() {
+       /* enregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Prospect a = new Prospect()
+                Prospect a = new Prospect(nom.getText().toString(), prenom.getText().toString(), phone.getText().toString(), email.getText().toString(), notes.getText().toString());
             }
-        });
+        });*/
 
     }
 }

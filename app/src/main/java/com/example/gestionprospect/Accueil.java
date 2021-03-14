@@ -10,14 +10,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 
 import java.util.ArrayList;
 
 public class Accueil extends AppCompatActivity {
 
     private Button nouveau;
-    private Spinner spinner;
+    private Spinner spinner_evenement;
+    private Spinner spinner_entreprise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,10 @@ public class Accueil extends AppCompatActivity {
         setContentView(R.layout.activity_accueil);
 
         //Liens entre graphique/variable
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner_evenement = (Spinner) findViewById(R.id.spinner_evenement);
+        spinner_entreprise = (Spinner) findViewById(R.id.spinner_entreprise);
         nouveau = (Button) findViewById(R.id.btn_nouveau);
+
 
         //Ajout ds une arrayList les éléments que l'on va mettre ds la ListView
         ArrayList<String> items = new ArrayList<>();
@@ -37,7 +39,7 @@ public class Accueil extends AppCompatActivity {
         //Blabla pr ajouter dans la ListView
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, items);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
+        spinner_evenement.setAdapter(arrayAdapter);
 
         //Au click du bouton --> on ouvre l'activité Nouveau
         nouveau.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +51,7 @@ public class Accueil extends AppCompatActivity {
         });
 
         //Quand on clique sur un item de la listView
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_evenement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String tutorialsName = parent.getItemAtPosition(position).toString();
