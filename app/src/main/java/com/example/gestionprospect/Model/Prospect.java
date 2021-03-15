@@ -1,4 +1,4 @@
-package com.example.gestionprospect;
+package com.example.gestionprospect.Model;
 
 public class Prospect {
 
@@ -7,6 +7,7 @@ public class Prospect {
     private String phone;
     private String email;
     private String notes;
+    private Entreprise entreprise;
 
     public Prospect(String nom, String prenom, String phone, String email, String notes){
         this.nom = nom;
@@ -14,6 +15,13 @@ public class Prospect {
         this.phone = phone;
         this.email = email;
         this.notes = notes;
+    }
+
+    public Prospect(String nom, String prenom, String phone, String email){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getNom() {
@@ -54,5 +62,13 @@ public class Prospect {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Entreprise getEntreprise() {
+        return entreprise;
+    }
+
+    public void setEntreprise(Entreprise entreprise) {
+        this.entreprise = entreprise;
     }
 }

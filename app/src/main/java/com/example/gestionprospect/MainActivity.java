@@ -2,22 +2,18 @@ package com.example.gestionprospect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.content.Intent;
+import android.graphics.BlendMode;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
 
-import com.example.gestionprospect.Control.Control;
-import com.example.gestionprospect.Model.AccesLocal;
+import com.example.gestionprospect.Database.DatabaseHelper;
+import com.example.gestionprospect.Model.Entreprise;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AccesLocal accesLocal;
-
-    private TextView textViewLogin;
-    private TextView textViewMDP;
-
-    private Control control = new Control();
+    DatabaseHelper db;
 
     private TextView login;
     private TextView password;
@@ -25,22 +21,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        accesLocal = new AccesLocal(this);
 
-        accesLocal.ajout();
+        db.createUsers();
 
-        //Liens entre graphique/variable
+        db = new DatabaseHelper(this);
+
+
         login = (TextView) findViewById(R.id.editTextLogin);
         password = (TextView) findViewById(R.id.editTextPassword);
         validate = (Button) findViewById(R.id.btn_Validate);
 
-        //Quand on click sur le bouton --> méthode connection
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accesLocal.checkConnexion(login.getText().toString(), password.getText().toString());
+                connection(login.getText().toString(), password.getText().toString());
             }
         });
 
@@ -48,20 +45,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //vérifie le login et MDP de l'utilisateur
-    public void connection(String login, String password){
+    public void connection(String loginUtilisateur, String mdp){
 
-        //control.connexion(login, password);
-       /* if(control.connexion(login, password) == true){
-             Intent intent=new Intent(this, Accueil.class);
-             startActivity(intent);
-        }else{
+        if (db.getPassword(loginUtilisateur).compareTo(mdp) == 0) {
+            Intent intent = new Intent(this, Accueil.class);
+            startActivity(intent);
+        } else {
+            password.setText("");
+            login.setText("");
             Toast.makeText(getApplicationContext(), "Login/MDP INCORRECT", Toast.LENGTH_SHORT).show();
+
         }
-        */
-
-
-
-
     }
 
 
