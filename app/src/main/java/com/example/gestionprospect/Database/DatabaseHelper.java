@@ -52,12 +52,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Bouchon pour créer des utilisateurs
     public void createUsers(){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT INTO USERS VALUES ('SGROUSSET', 'bpsen');";
-        //ContentValues cv = new ContentValues();
-        //cv.put("login", "SGROUSSET");
-        //cv.put("password", "bpsen");
-        //db.insert("USERS", null, cv);
-        db.execSQL(query);
+       // String query = "INSERT INTO USERS VALUES ('SGROUSSET', 'bpsen');";
+        ContentValues cv = new ContentValues();
+        cv.put("login", "EGUEISSAZ");
+        cv.put("password", "bpsen1");
+        db.insert("USERS", null, cv);
+        //db.execSQL(query);
     }
 
     public void insertProspect(String nom, String prenom, String phone, String email){

@@ -29,7 +29,7 @@ public class Accueil extends AppCompatActivity {
         spinner_entreprise = (Spinner) findViewById(R.id.spinner_entreprise);
         nouveau = (Button) findViewById(R.id.btn_nouveau);
 
-
+/*
         //Ajout ds une arrayList les éléments que l'on va mettre ds la ListView
         ArrayList<String> items = new ArrayList<>();
         items.add("Conduent");
@@ -40,7 +40,7 @@ public class Accueil extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, items);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_evenement.setAdapter(arrayAdapter);
-
+*/
         //Au click du bouton --> on ouvre l'activité Nouveau
         nouveau.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ public class Accueil extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+/*
         //Quand on clique sur un item de la listView
         spinner_evenement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -61,5 +61,6 @@ public class Accueil extends AppCompatActivity {
             public void onNothingSelected(AdapterView <?> parent) {
             }
         });
+         */
     }
 }
