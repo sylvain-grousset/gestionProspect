@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
-        db.createUsers();
+        //db.createUsers();
 
         login = (TextView) findViewById(R.id.editTextLogin);
         password = (TextView) findViewById(R.id.editTextPassword);

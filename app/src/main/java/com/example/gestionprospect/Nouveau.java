@@ -32,6 +32,7 @@ public class Nouveau extends AppCompatActivity {
         phone = (TextView) findViewById(R.id.editTextPhone);
         email = (TextView) findViewById(R.id.editTextEmail);
         notes = (TextView) findViewById(R.id.editTextNotes);
+        enregistrer = (Button) findViewById(R.id.btn_enregistrer);
 
        enregistrer.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,11 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="Accueil" >
         </activity>
 
         <activity android:name="Nouveau" >
         </activity>
+
     </application>
 
 </manifest>
