@@ -1,27 +1,23 @@
 package com.example.gestionprospect.Model;
 
-public class Prospect {
+import java.io.Serializable;
+
+public class Prospect implements Serializable {
 
     private String nom;
     private String prenom;
     private String phone;
     private String email;
     private String notes;
-    private Entreprise entreprise;
+    private String entreprise;
 
-    public Prospect(String nom, String prenom, String phone, String email, String notes){
+
+    public Prospect(String nom, String prenom, String phone, String email, String entreprise){
         this.nom = nom;
         this.prenom = prenom;
         this.phone = phone;
         this.email = email;
-        this.notes = notes;
-    }
-
-    public Prospect(String nom, String prenom, String phone, String email){
-        this.nom = nom;
-        this.prenom = prenom;
-        this.phone = phone;
-        this.email = email;
+        this.entreprise = entreprise;
     }
 
     public String getNom() {
@@ -64,11 +60,13 @@ public class Prospect {
         this.notes = notes;
     }
 
-    public Entreprise getEntreprise() {
+    public String getEntreprise() {
         return entreprise;
     }
 
-    public void setEntreprise(Entreprise entreprise) {
+    public void setEntreprise(String entreprise) {
         this.entreprise = entreprise;
     }
+
+
 }

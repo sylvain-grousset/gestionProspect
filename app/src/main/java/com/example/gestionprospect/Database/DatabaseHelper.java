@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.gestionprospect.Model.Entreprise;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private String TABLE_USERS = "CREATE TABLE USERS ("
@@ -16,7 +18,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "nom TEXT,"
             + "prenom TEXT,"
             + "phone TEXT,"
-            + "email TEXT);";
+            + "email TEXT,"
+            + "entreprise TEXT);";
 
     public DatabaseHelper(Context context){
         super(context, "prospect.db", null, 1);
@@ -54,19 +57,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
        // String query = "INSERT INTO USERS VALUES ('SGROUSSET', 'bpsen');";
         ContentValues cv = new ContentValues();
-        cv.put("login", "EGUEISSAZ");
-        cv.put("password", "bpsen1");
+        cv.put("login", "SGROUSSET");
+        cv.put("password", "bpsen");
         db.insert("USERS", null, cv);
         //db.execSQL(query);
     }
 
-    public void insertProspect(String nom, String prenom, String phone, String email){
+    /**
+     * <p>Insère les prospects dans la base de données</p>
+     * @param nom
+     * @param prenom
+     * @param phone
+     * @param email
+     */
+    public void insertProspect(String nom, String prenom, String phone, String email, String entreprise){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("nom", nom);
         cv.put("prenom", prenom);
         cv.put("phone", phone);
         cv.put("email", email);
+        cv.put("entreprise", entreprise);
         db.insert("prospect", null, cv);
     }
 

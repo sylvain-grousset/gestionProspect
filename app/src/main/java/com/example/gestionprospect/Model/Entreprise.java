@@ -1,6 +1,8 @@
 package com.example.gestionprospect.Model;
 
-public class Entreprise {
+import java.io.Serializable;
+
+public class Entreprise implements Serializable {
 
     private String raisonSocial;
     private int siret;

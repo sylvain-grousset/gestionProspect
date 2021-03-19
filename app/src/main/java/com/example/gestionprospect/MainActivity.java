@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.BlendMode;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
 
 import com.example.gestionprospect.Database.DatabaseHelper;
 import com.example.gestionprospect.Model.Entreprise;
+import com.example.gestionprospect.Model.GestionProspect;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView login;
     private TextView password;
     private Button validate;
+    private GestionProspect application = new GestionProspect();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
-        //db.createUsers();
+        db.createUsers();
+
+        //Bouchon pour ajouter des entreprises
+       application.addEntreprise("Cari Electronic", 58756954);
+       application.addEntreprise("Banque de France", 5425654);
+       application.addEntreprise("SpaceX", 54856255);
+       application.addEntreprise("Microsoft", 5452845);
+       application.addEntreprise("Google", 5485652);
 
         login = (TextView) findViewById(R.id.editTextLogin);
         password = (TextView) findViewById(R.id.editTextPassword);
@@ -35,18 +49,24 @@ public class MainActivity extends AppCompatActivity {
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connection(login.getText().toString(), password.getText().toString());
+                    connection(login.getText().toString(), password.getText().toString(), application);
             }
         });
 
 
     }
 
-    //vérifie le login et MDP de l'utilisateur
-    public void connection(String loginUtilisateur, String mdp){
+    /**
+     * <p>Vérifie la connexion</p>
+     * @param loginUtilisateur
+     * @param mdp
+     * @param application
+     */
+    public void connection(String loginUtilisateur, String mdp, GestionProspect application){
 
         if (db.getPassword(loginUtilisateur).compareTo(mdp) == 0) {
             Intent intent = new Intent(this, Accueil.class);
+            intent.putExtra("gestionProspect", (Serializable) application);
             startActivity(intent);
         } else {
             password.setText("");
