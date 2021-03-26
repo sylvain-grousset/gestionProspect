@@ -19,8 +19,8 @@ public class GestionProspect implements Serializable {
         lesProspects.add(a);
     }
 
-    public void addEntreprise(String raisonSocial, int siret){
-        Entreprise a = new Entreprise(raisonSocial, siret);
+    public void addEntreprise(String raisonSocial, String siren){
+        Entreprise a = new Entreprise(raisonSocial, siren);
         lesEntreprises.add(a);
     }
 
@@ -45,6 +45,9 @@ public class GestionProspect implements Serializable {
 
         for(int i=0 ; i<lesEntreprises.size() ; i++){
             lesNomsEntreprises.add(lesEntreprises.get(i).getRaisonSocial());
+        }
+        for(int j=0; j<lesNomsEntreprises.size() ; j++){
+            Log.d("TEST100", lesNomsEntreprises.get(j));
         }
         return lesNomsEntreprises;
     }

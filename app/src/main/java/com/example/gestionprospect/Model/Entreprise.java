@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Entreprise implements Serializable {
 
     private String raisonSocial;
-    private int siret;
+    private String siren;
 
-    public Entreprise(String raisonSocial, int siret){
+    public Entreprise(String raisonSocial, String siren){
         this.raisonSocial = raisonSocial;
-        this.siret = siret;
+        this.siren = siren;
     }
 
     public String getRaisonSocial() {
@@ -20,14 +20,11 @@ public class Entreprise implements Serializable {
         this.raisonSocial = raisonSocial;
     }
 
-    public int getSiret() {
-        return siret;
+    public String getSiren() {
+        return siren;
     }
 
-    public void setSiret(int siret) {
-        this.siret = siret;
+    public void setSiren(String siren) {
+        this.siren = siren;
     }
-
-
-
 }

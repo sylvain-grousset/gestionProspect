@@ -20,7 +20,10 @@
         <activity android:name="Accueil" >
         </activity>
 
-        <activity android:name="Nouveau" >
+        <activity android:name=".CreateProspect" >
+        </activity>
+
+        <activity android:name="CreateEntreprise" >
         </activity>
 
     </application>

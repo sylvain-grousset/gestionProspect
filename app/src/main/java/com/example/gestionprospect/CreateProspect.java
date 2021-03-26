@@ -2,22 +2,20 @@ package com.example.gestionprospect;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gestionprospect.Database.DatabaseHelper;
 import com.example.gestionprospect.Model.GestionProspect;
-import com.example.gestionprospect.Model.Prospect;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Nouveau extends AppCompatActivity {
+public class CreateProspect extends AppCompatActivity {
 
     private TextView nom;
     private TextView prenom;
@@ -29,6 +27,16 @@ public class Nouveau extends AppCompatActivity {
 
     private GestionProspect application;
     DatabaseHelper db = new DatabaseHelper(this);
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(CreateProspect.this, Accueil.class);
+        intent.putExtra("gestionProspect", (Serializable) application);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +55,7 @@ public class Nouveau extends AppCompatActivity {
         Intent intent = getIntent();
         this.application = (GestionProspect) intent.getSerializableExtra("gestionProspect");
 
-
-
-        ArrayList<String> lesEntreprises = application.getNomsEntreprises();
+        ArrayList<String> lesEntreprises = db.getNameEntreprise();
         spinner_entreprise.setItems(lesEntreprises);
 
         enregistrer.setOnClickListener(new View.OnClickListener() {

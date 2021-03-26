@@ -17,7 +17,7 @@ import com.example.gestionprospect.Model.GestionProspect;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     DatabaseHelper db;
 
@@ -35,16 +35,15 @@ public class MainActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         db.createUsers();
 
-        //Bouchon pour ajouter des entreprises
-       application.addEntreprise("Cari Electronic", 58756954);
-       application.addEntreprise("Banque de France", 5425654);
-       application.addEntreprise("SpaceX", 54856255);
-       application.addEntreprise("Microsoft", 5452845);
-       application.addEntreprise("Google", 5485652);
 
         login = (TextView) findViewById(R.id.editTextLogin);
         password = (TextView) findViewById(R.id.editTextPassword);
         validate = (Button) findViewById(R.id.btn_Validate);
+
+        //A SUPPRIMER QUAND TERMINE
+        password.setText("bpsen");
+        login.setText("SGROUSSET");
+
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         if (db.getPassword(loginUtilisateur).compareTo(mdp) == 0) {
             Intent intent = new Intent(this, Accueil.class);
             intent.putExtra("gestionProspect", (Serializable) application);
+            //intent.putExtra("BDD", (Serializable) db);
             startActivity(intent);
         } else {
             password.setText("");
