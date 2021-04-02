@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,10 +63,14 @@ public class CreateProspect extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Ajout du prospect dans la base de données
-                db.insertProspect(nom.getText().toString(), prenom.getText().toString(), phone.getText().toString(), email.getText().toString(), spinner_entreprise.getText().toString());
-
-                //Ajout du prospect dans la classe Prospect
-                application.addProspect(nom.getText().toString(), prenom.getText().toString(), phone.getText().toString(), email.getText().toString(), spinner_entreprise.getText().toString());
+                boolean verif = db.insertProspect(nom.getText().toString(), prenom.getText().toString(), phone.getText().toString(), email.getText().toString(), spinner_entreprise.getText().toString());
+                    
+                if(verif == true){
+                    application.addProspect(nom.getText().toString(), prenom.getText().toString(), phone.getText().toString(), email.getText().toString(), spinner_entreprise.getText().toString());
+                    Toast.makeText(CreateProspect.this, "Prospect ajouté avec succès !", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(CreateProspect.this, "Impossible d'jaouter le prospect !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

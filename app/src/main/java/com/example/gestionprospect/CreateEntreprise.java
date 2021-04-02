@@ -57,9 +57,15 @@ public class CreateEntreprise extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                db.insertEntreprise(raisonSociale.getText().toString(), siren.getText().toString());
-                application.addEntreprise(raisonSociale.getText().toString(), siren.getText().toString());
-
+                boolean verif = db.insertEntreprise(raisonSociale.getText().toString(), siren.getText().toString());
+                if(verif == true){
+                    application.addEntreprise(raisonSociale.getText().toString(), siren.getText().toString());
+                    Toast.makeText(CreateEntreprise.this, "Entreprise ajoutée avec succès !", Toast.LENGTH_SHORT).show();
+                    siren.setText("");
+                    raisonSociale.setText("");
+                }else{
+                    Toast.makeText(CreateEntreprise.this, "Impossible d'ajouter une entreprise déjà existante !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

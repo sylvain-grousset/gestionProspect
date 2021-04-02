@@ -33,8 +33,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
-        db.createUsers();
 
+        //BOUCHONS
+        //db.createUsers();
+        //db.createEntreprise();
+        //db.createProspect();
 
         login = (TextView) findViewById(R.id.editTextLogin);
         password = (TextView) findViewById(R.id.editTextPassword);
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         //A SUPPRIMER QUAND TERMINE
         password.setText("bpsen");
         login.setText("SGROUSSET");
+
+
 
 
         validate.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         if (db.getPassword(loginUtilisateur).compareTo(mdp) == 0) {
             Intent intent = new Intent(this, Accueil.class);
             intent.putExtra("gestionProspect", (Serializable) application);
-            //intent.putExtra("BDD", (Serializable) db);
             startActivity(intent);
         } else {
             password.setText("");

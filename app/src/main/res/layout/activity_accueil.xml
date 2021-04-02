@@ -5,21 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ir.androidexception.datatable.DataTable
+        android:id="@+id/data_table"
+        android:layout_width="354dp"
+        android:layout_height="325dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="349dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="17dp"
+
+        app:direction="ltr"
+        app:header_background_color="#fff"
+        app:header_gravity="center"
+        app:header_horizontal_padding="0dp"
+        app:header_text_color="#000"
+        app:header_text_size="7sp"
+        app:header_vertical_padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:persian_number="false"
+        app:row_background_color="#fff"
+        app:row_gravity="center"
+        app:row_text_color="#000"
+        app:row_text_size="7sp"
+        app:row_vertical_padding="16dp"
+        />
+
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/spinner_entreprise"
         android:layout_width="329dp"
         android:layout_height="52dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="641dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:layout_marginBottom="622dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
         android:id="@+id/btn_new_prospect"

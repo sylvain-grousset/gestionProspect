@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.gestionprospect.Model.Entreprise;
 import com.example.gestionprospect.Model.GestionProspect;
+import com.example.gestionprospect.Model.Prospect;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,6 +55,36 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         onCreate(db);
     }
 
+    //**************************************BOUCHON POUR CREER DES UTILISATEURS ; ENTREPRISES ; PROSPECT*************************************************
+    public void createUsers() {
+        SQLiteDatabase db = getWritableDatabase();
+        // String query = "INSERT INTO USERS VALUES ('SGROUSSET', 'bpsen');";
+        ContentValues cv = new ContentValues();
+        cv.put("login", "SGROUSSET");
+        cv.put("password", "bpsen");
+        db.insert("USERS", null, cv);
+        //db.execSQL(query);
+    }
+
+    public void createEntreprise(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "INSERT INTO ENTREPRISE VALUES ('Cari Electronic', 12345676432), " +
+                "('SpaceX', 345654387), " +
+                "('Apple', 86996476569);";
+        db.execSQL(query);
+    }
+
+    public void createProspect(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "INSERT INTO PROSPECT VALUES ('GROUSSET', 'Sylvain', '0645288407', 'sylvain.grou@hotmail.fr', 'Cari Electronic'), " +
+                "('GUEISSAZ', 'Emmanuel', '0785465254', 'gueissazmanu@gmail.com', 'SpaceX'), " +
+                "('TEYSSERE', 'Karina', '0609508070', 'karinateyssere@gmail.com', 'Apple');";
+        db.execSQL(query);
+
+    }
+    //**************************************FIN BOUCHON**************************************************************************************************
+
+
     /**
      * <p>Récupère le mot de passe de l'utilisateur qui demande à se connecter</p>
      *
@@ -68,17 +99,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
 
     }
 
-    //Bouchon pour créer des utilisateurs
-    public void createUsers() {
-        SQLiteDatabase db = getWritableDatabase();
-        // String query = "INSERT INTO USERS VALUES ('SGROUSSET', 'bpsen');";
-        ContentValues cv = new ContentValues();
-        cv.put("login", "SGROUSSET");
-        cv.put("password", "bpsen");
-        db.insert("USERS", null, cv);
-        //db.execSQL(query);
-    }
-
     /**
      * <p>Insère les prospects dans la base de données</p>
      *
@@ -87,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
      * @param phone
      * @param email
      */
-    public void insertProspect(String nom, String prenom, String phone, String email, String entreprise) {
+    public boolean insertProspect(String nom, String prenom, String phone, String email, String entreprise) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("nom", nom);
@@ -95,30 +115,41 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         cv.put("phone", phone);
         cv.put("email", email);
         cv.put("entreprise", entreprise);
-        db.insert("prospect", null, cv);
+        try{
+            db.insertOrThrow("prospect", null, cv);
+            return true;
+        }catch (Exception err){
+            return false;
+        }
+
     }
 
     /**
-     * <p>Insère les entreprises dans la table ENTREPRISE</p>
+     *<p>Insère les entreprises dans la table ENTREPRISE</p>
      * @param raisonSociale
      * @param siren
+     * @return boolean
      */
-    public void insertEntreprise(String raisonSociale, String siren) {
-        Log.d("RAISON SOCIALE = ", raisonSociale);
-        Log.d("SIREN ENTREPRISE :", siren);
+    public boolean insertEntreprise(String raisonSociale, String siren) {
 
         SQLiteDatabase db = getWritableDatabase();
-        //ContentValues cv = new ContentValues();
-        //cv.put("raisonSociale", raisonSociale);
-        //cv.put("siren", siren);
-        //db.insert("ENTREPRISE", null, cv);
-        String query = "INSERT INTO ENTREPRISE VALUES ('" + raisonSociale + "', '" + siren + "');";
-        db.execSQL(query);
+        ContentValues cv = new ContentValues();
+        cv.put("raisonSociale", raisonSociale);
+        cv.put("siren", siren);
+        try {
+            db.insertOrThrow("ENTREPRISE", null, cv);
+            return true;
+        }catch (Exception err){
+            return false;
+        }
+
+        //String query = "INSERT INTO ENTREPRISE VALUES ('" + raisonSociale + "', '" + siren + "');";
+        //db.execSQL(query);
 
     }
 
     /**
-     * <p></p>
+     * <p>Retourne tous les noms d'entreprises</p>
      * @return ArrayList
      */
     public ArrayList<String> getNameEntreprise(){
@@ -140,6 +171,58 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
             }
         }
         return entreprise;
+    }
+
+    /**
+     * <p>Liste de prospect pour peupler la table</p>
+     * @return ArrayList<Prospect>
+     */
+    public ArrayList<Prospect> getProspectForTable(){
+        SQLiteDatabase db = getWritableDatabase();
+        ArrayList<Prospect> a = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery("SELECT nom, prenom, entreprise FROM PROSPECT ORDER BY nom;", null);
+
+        cursor.moveToFirst();
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                String nom = cursor.getString(cursor.getColumnIndex("nom"));
+                String prenom = cursor.getString(cursor.getColumnIndex("prenom"));
+                String entreprise = cursor.getString(cursor.getColumnIndex("entreprise"));
+
+                Prospect prospect = new Prospect(nom, prenom, entreprise);
+                a.add(prospect);
+                cursor.moveToNext();
+            }
+        }
+        return a;
+    }
+
+    /**
+     * <p>Liste de prospect trié par entreprise pour peupler la table</p>
+     * @param company
+     * @return ArrayList<Prospect>
+     */
+    public ArrayList<Prospect> getProspectForTableSortedByEntreprise(String company){
+        SQLiteDatabase db = getWritableDatabase();
+        ArrayList<Prospect> a = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery("SELECT nom, prenom, entreprise FROM PROSPECT WHERE entreprise = '" + company + "';", null);
+
+
+        cursor.moveToFirst();
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                String nom = cursor.getString(cursor.getColumnIndex("nom"));
+                String prenom = cursor.getString(cursor.getColumnIndex("prenom"));
+                String entreprise = cursor.getString(cursor.getColumnIndex("entreprise"));
+
+                Prospect prospect = new Prospect(nom, prenom, entreprise);
+                a.add(prospect);
+                cursor.moveToNext();
+            }
+        }
+        return a;
     }
 
 

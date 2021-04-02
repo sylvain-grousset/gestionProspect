@@ -20,6 +20,12 @@ public class Prospect implements Serializable {
         this.entreprise = entreprise;
     }
 
+    public Prospect(String nom, String prenom, String entreprise){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.entreprise = entreprise;
+    }
+
     public String getNom() {
         return nom;
     }
