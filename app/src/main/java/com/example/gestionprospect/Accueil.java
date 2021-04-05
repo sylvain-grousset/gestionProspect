@@ -83,6 +83,9 @@ public class Accueil extends AppCompatActivity implements Serializable {
 
     }
 
+    /**
+     * <p>Initialise la table avec tous les prospects trié par ordre alphabétique</p>
+     */
     private void setTable(){
         ArrayList <Prospect> a = db.getProspectForTable();
 
@@ -111,6 +114,11 @@ public class Accueil extends AppCompatActivity implements Serializable {
         table.inflate(this);
 
     }
+
+    /**
+     * <p>Reconstrui la table avec les prospects trié par entreprise</p>
+     * @param entreprise
+     */
     private void setTableByEntreprise(String entreprise){
         ArrayList <Prospect> a = db.getProspectForTableSortedByEntreprise(entreprise);
 

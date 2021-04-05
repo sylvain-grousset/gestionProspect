@@ -106,6 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
      * @param prenom
      * @param phone
      * @param email
+     * @return boolean
      */
     public boolean insertProspect(String nom, String prenom, String phone, String email, String entreprise) {
         SQLiteDatabase db = getWritableDatabase();

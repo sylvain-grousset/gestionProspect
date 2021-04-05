@@ -16,7 +16,13 @@ import com.example.gestionprospect.Database.DatabaseHelper;
 import com.example.gestionprospect.Model.Entreprise;
 import com.example.gestionprospect.Model.GestionProspect;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class CreateEntreprise extends AppCompatActivity{
@@ -59,6 +65,24 @@ public class CreateEntreprise extends AppCompatActivity{
 
                 boolean verif = db.insertEntreprise(raisonSociale.getText().toString(), siren.getText().toString());
                 if(verif == true){
+
+                   /* try {
+                        URL url = new URL("https://api.insee.fr/entreprises/sirene/V3/siren/" +siren.getText().toString());
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                        conn.setRequestProperty("Authorization","Bearer "+"c8001282-8b58-32ce-a9f2-05402f3d7197");
+                        conn.setRequestProperty("Content-Type","application/json");
+                        conn.setRequestMethod("GET");
+
+                        int a = conn.getResponseCode();
+
+                        System.out.println("STATUT CODE :" +a);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+
                     application.addEntreprise(raisonSociale.getText().toString(), siren.getText().toString());
                     Toast.makeText(CreateEntreprise.this, "Entreprise ajoutée avec succès !", Toast.LENGTH_SHORT).show();
                     siren.setText("");
