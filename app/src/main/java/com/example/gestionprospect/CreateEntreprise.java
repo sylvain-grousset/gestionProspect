@@ -67,11 +67,12 @@ public class CreateEntreprise extends AppCompatActivity{
                 if(verif == true){
 
                    /* try {
-                        URL url = new URL("https://api.insee.fr/entreprises/sirene/V3/siren/" +siren.getText().toString());
+                        String urlQuery = "https://api.insee.fr/entreprises/sirene/V3/siren/" +siren.getText().toString();
+                        Log.d("query : ", urlQuery);
+                        URL url = new URL(urlQuery);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestProperty("Authorization","Bearer "+"c8001282-8b58-32ce-a9f2-05402f3d7197");
-                        conn.setRequestProperty("Content-Type","application/json");
                         conn.setRequestMethod("GET");
 
                         int a = conn.getResponseCode();

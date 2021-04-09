@@ -67,6 +67,11 @@ public class CreateProspect extends AppCompatActivity {
                     
                 if(verif == true){
                     application.addProspect(nom.getText().toString(), prenom.getText().toString(), phone.getText().toString(), email.getText().toString(), spinner_entreprise.getText().toString());
+                    nom.setText("");
+                    prenom.setText("");
+                    phone.setText("");
+                    email.setText("");
+                    notes.setText("");
                     Toast.makeText(CreateProspect.this, "Prospect ajouté avec succès !", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(CreateProspect.this, "Impossible d'jaouter le prospect !", Toast.LENGTH_SHORT).show();
